@@ -5,3 +5,6 @@
   airly_readout_job:
     cron: '*/5 * * * * *'
     class: AirlyReadoutJob
+  tauron_readout_job:
+    cron: '*/5 * * * * *'
+    class: TauronReadoutJob
