@@ -2,6 +2,7 @@
 
 require 'bundler'
 require 'pathname'
+require 'dotenv/load' unless ENV['APP_ENV'] == 'production'
 
 $LOAD_PATH.unshift(Dir.pwd)
 
