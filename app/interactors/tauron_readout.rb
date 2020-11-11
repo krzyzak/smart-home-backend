@@ -15,10 +15,6 @@ class TauronReadout
     end
   end
 
-  private
-
-  attr_reader :date
-
   def data
     {
       generation: generation,
@@ -27,6 +23,10 @@ class TauronReadout
       balance: balance
     }
   end
+
+  private
+
+  attr_reader :date
 
   def generation
     readouts.dig('dane', 'OZE').map do |_, readout|

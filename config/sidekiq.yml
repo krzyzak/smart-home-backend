@@ -8,3 +8,6 @@
   tauron_readout_job:
     cron: '*/5 * * * * *'
     class: TauronReadoutJob
+  speedtest_readout_job:
+    cron: '*/5 * * * * *'
+    class: SpeedtestReadoutJob
