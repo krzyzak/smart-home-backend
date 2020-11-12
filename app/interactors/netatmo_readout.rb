@@ -1,7 +1,9 @@
 class NetatmoReadout
   def call
+    return unless readout
+
     data.each do |key, value|
-      influx.write_point(key.to_s, values: {value: value})
+      influx.write_point(key.to_s, values: { value: value })
     end
   end
 
@@ -32,7 +34,11 @@ class NetatmoReadout
   end
 
   def readout
-    @readout ||= client.get_station_data
+    @readout ||= begin
+      client.get_station_data
+    rescue RuntimeError # client raises RuntimeError in case of unsuccessfull response :(
+      nil
+    end
   end
 
   def outdoor_module
