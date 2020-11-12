@@ -2,7 +2,7 @@
 
 class AirlyReadout
   def call
-    return if data.values.none?
+    return if request.status != 200 || data.values.none?
 
     data.each do |key, value|
       influx.write_point(key.to_s, values: { value: value })
@@ -24,6 +24,7 @@ class AirlyReadout
   private
 
   def find_readout(name)
+    binding.irb
     readout['values'].find(-> { {} }) { |r| r['name'] == name.upcase }['value']
   end
 
