@@ -1,7 +1,7 @@
 class SpeedtestReadout
   def call
     data.each do |key, value|
-      influx.write_point(key.to_s, values: {value: value})
+      influx.write_point(key.to_s, values: { value: value })
     end
   end
 

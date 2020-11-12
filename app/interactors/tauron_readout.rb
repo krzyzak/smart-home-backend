@@ -8,6 +8,8 @@ class TauronReadout
   end
 
   def call
+    return unless readouts
+
     data.each do |key, points|
       points.each do |point|
         influx.write_point(key.to_s, point)
@@ -90,7 +92,8 @@ class TauronReadout
           .cookies(login_req.cookies)
           .persistent("https://#{redir_uri.host}") do |inner_http|
             @html = inner_http.get("/?#{redir_uri.query}", ssl_context: ssl_context).body.to_s
-            @readouts = JSON.parse(inner_http.post('/index/charts', params: params, ssl_context: ssl_context).body)
+            inner_body = inner_http.post('/index/charts', params: params, ssl_context: ssl_context).body
+            @readouts = inner_body.empty? ? nil : JSON.parse(inner_body)
           end
       end
   end
