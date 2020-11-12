@@ -23,6 +23,9 @@ GEM
       et-orbi (~> 1.1, >= 1.1.8)
       raabro (~> 1.4)
     geocoder (1.6.4)
+    hanami-utils (1.3.6)
+      concurrent-ruby (~> 1.0)
+      transproc (~> 1.0)
     http (4.4.1)
       addressable (~> 2.3)
       http-cookie (~> 1.0)
@@ -69,11 +72,13 @@ GEM
       sidekiq (>= 3)
       thwait
       tilt (>= 1.4.0)
+    sixarm_ruby_unaccent (1.2.0)
     speedtest (0.2.3)
       httparty (~> 0.13)
     thwait (0.2.0)
       e2mmap
     tilt (2.0.10)
+    transproc (1.1.1)
     tzinfo (2.0.3)
       concurrent-ruby (~> 1.0)
     unf (0.1.4)
@@ -86,12 +91,14 @@ PLATFORMS
 
 DEPENDENCIES
   dotenv
+  hanami-utils (~> 1.3)
   http (~> 4.4)
   influxdb (~> 0.8)
   netatmo (~> 0.1)
   nokogiri (~> 1.10)
   sidekiq (~> 6.0)
   sidekiq-scheduler (~> 3.0)
+  sixarm_ruby_unaccent (~> 1.2)
   speedtest (~> 0.2)
 
 BUNDLED WITH

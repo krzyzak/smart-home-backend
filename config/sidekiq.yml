@@ -11,3 +11,6 @@
   speedtest_readout_job:
     cron: '*/5 * * * * *'
     class: SpeedtestReadoutJob
+  fibaro_readout_job:
+    cron: '* * * * * *'
+    class: FibaroReadoutJob
