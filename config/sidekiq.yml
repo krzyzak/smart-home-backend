@@ -14,3 +14,6 @@
   fibaro_readout_job:
     cron: '* * * * * *'
     class: FibaroReadoutJob
+  pv_readout_job:
+      cron: '*/5 * * * * *'
+      class: PVReadoutJob
