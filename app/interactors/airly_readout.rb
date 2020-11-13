@@ -24,7 +24,6 @@ class AirlyReadout
   private
 
   def find_readout(name)
-    binding.irb
     readout['values'].find(-> { {} }) { |r| r['name'] == name.upcase }['value']
   end
 
