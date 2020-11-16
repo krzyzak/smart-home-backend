@@ -3,7 +3,7 @@
     cron: '*/5 * * * * *'
     class: NetatmoReadoutJob
   airly_readout_job:
-    cron: '*/5 * * * * *'
+    cron: '*/15 * * * * *'
     class: AirlyReadoutJob
   tauron_readout_job:
     cron: '*/5 * * * * *'
