@@ -1,19 +1,19 @@
 :schedule:
   netatmo_readout_job:
-    cron: '*/5 * * * * *'
+    cron: '*/5 * * * *'
     class: NetatmoReadoutJob
   airly_readout_job:
-    cron: '*/15 * * * * *'
+    cron: '*/15 * * * *'
     class: AirlyReadoutJob
   tauron_readout_job:
-    cron: '*/5 * * * * *'
+    cron: '*/5 * * * *'
     class: TauronReadoutJob
   speedtest_readout_job:
-    cron: '*/5 * * * * *'
+    cron: '*/5 * * * *'
     class: SpeedtestReadoutJob
   fibaro_readout_job:
-    cron: '* * * * * *'
+    cron: '* * * * *'
     class: FibaroReadoutJob
   pv_readout_job:
-      cron: '*/5 * * * * *'
+      cron: '*/5 * * * *'
       class: PVReadoutJob
