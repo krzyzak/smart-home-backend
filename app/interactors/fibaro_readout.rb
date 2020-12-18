@@ -80,7 +80,10 @@ class FibaroReadout
 
   def should_skip_alarm_device_write?(device, values)
     device_name = Hanami::Utils::String.dasherize(device['name']).unaccent.gsub('.', '')
+
     query = alarm_influx.query(%(SELECT * FROM "#{device_name}" ORDER BY DESC LIMIT 1))
+
+    return true if query.empty?
 
     data = Hanami::Utils::Hash.symbolize(query.first['values'].first.slice('alarm', 'lastBreached', 'state', 'tamper', 'tamperAlarm'))
     data == values
