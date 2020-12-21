@@ -8,6 +8,8 @@ $LOAD_PATH.unshift(Dir.pwd)
 
 Bundler.require
 
+require_relative './sentry'
+
 Dir[Pathname.new(Dir.pwd).join('app/**/*.rb')].sort.each do |file|
   require file
 end
