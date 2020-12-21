@@ -40,7 +40,7 @@ class TauronReadout
   end
 
   def consumption
-    readouts.dig('dane', 'chart').map do |readout|
+    readouts.dig('dane', 'chart').map do |_, readout|
       {
         values: { value: readout['EC'].to_f },
         timestamp: (Date.parse(readout['Date']).to_time + (60 * 60 * readout['Hour'].to_i)).to_i
