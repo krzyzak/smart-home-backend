@@ -12,5 +12,5 @@ gem 'sixarm_ruby_unaccent', '~> 1.2', require: false
 gem 'speedtest', '~> 0.2'
 
 group :development, :test do
-  gem 'dotenv'
+  gem 'dotenv', require: false
 end
