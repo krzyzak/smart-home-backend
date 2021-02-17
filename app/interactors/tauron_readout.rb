@@ -22,7 +22,8 @@ class TauronReadout
       generation: generation,
       consumption: consumption,
       delta: delta,
-      balance: balance
+      meter_generation: meter_generation,
+      meter_consumption: meter_consumption
     }
   end
 
@@ -59,10 +60,20 @@ class TauronReadout
     end
   end
 
-  def balance
-    value = Nokogiri::HTML(@html).css('.gray-box dd.scale').text.to_i
+  def meter_consumption
+    value = parsed_readouts_html.css('.readingsData span.value').first.text.to_i
 
     [{ values: { value: value * 1000 } }]
+  end
+
+  def meter_generation
+    value = parsed_readouts_html.css('h2:contains("Generacja")').first.next_element.css('span.value').first.text.to_i
+
+    [{ values: { value: value * 1000 } }]
+  end
+
+  def parsed_readouts_html
+    @parsed_readouts_html ||= Nokogiri::HTML(@readouts_html)
   end
 
   def readouts
@@ -92,7 +103,9 @@ class TauronReadout
           .cookies(login_req.cookies)
           .persistent("https://#{redir_uri.host}") do |inner_http|
             @html = inner_http.get("/?#{redir_uri.query}", ssl_context: ssl_context).body.to_s
+            @readouts_html = inner_http.get("/odczyty", ssl_context: ssl_context).body.to_s
             inner_body = inner_http.post('/index/charts', params: params, ssl_context: ssl_context).body
+
             @readouts = inner_body.empty? ? nil : JSON.parse(inner_body)
           end
       end
