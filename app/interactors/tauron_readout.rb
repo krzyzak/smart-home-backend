@@ -22,6 +22,7 @@ class TauronReadout
       generation: generation,
       consumption: consumption,
       delta: delta,
+      balance: balance,
       meter_generation: meter_generation,
       meter_consumption: meter_consumption
     }
@@ -49,6 +50,7 @@ class TauronReadout
     end
   end
 
+
   def delta
     generation.zip(consumption).map do |(generation, consumption)|
       value = generation.dig(:values, :value) - consumption.dig(:values, :value)
@@ -61,15 +63,25 @@ class TauronReadout
   end
 
   def meter_consumption
-    value = parsed_readouts_html.css('.readingsData span.value').first.text.to_i
-
-    [{ values: { value: value * 1000 } }]
+    [{ values: { value: meter_consumption_value } }]
   end
 
   def meter_generation
-    value = parsed_readouts_html.css('h2:contains("Generacja")').first.next_element.css('span.value').first.text.to_i
+    [{ values: { value: meter_generation_value } }]
+  end
 
-    [{ values: { value: value * 1000 } }]
+  def meter_consumption_value
+    parsed_readouts_html.css('.readingsData span.value').first.text.to_i * 1000
+  end
+
+  def meter_generation_value
+    parsed_readouts_html.css('h2:contains("Generacja")').first.next_element.css('span.value').first.text.to_i * 1000
+  end
+
+  def balance
+    balance = (meter_generation_value * 0.8) - meter_consumption_value
+
+    [{ values: { value: balance } }]
   end
 
   def parsed_readouts_html
