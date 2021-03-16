@@ -43,6 +43,11 @@ class FibaroReadout
 
   def device_value(device)
     value = device.dig('properties', 'value')
+
+    if device.fetch('interfaces', []).include?('energy')
+      return { energy: device.dig('properties', 'energy'), power: device.dig('properties', 'power') }
+    end
+
     if value.is_a?(Numeric)
       { num_value: value.to_f }
     elsif device['properties'].key?('alarm')
