@@ -75,7 +75,7 @@ class TauronReadout
   end
 
   def meter_generation_value
-    parsed_readouts_html.css('h2:contains("Generacja")').first.next_element.css('span.value').first.text.to_i * 1000
+    parsed_readouts_html.css('h2:contains("Oddanie")').first.next_element.css('span.value').first.text.to_i * 1000
   end
 
   def balance
